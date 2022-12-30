@@ -10,22 +10,30 @@ def index():
 def predict_emotion():
     
     # Obtener el texto ingresado del requerimiento POST.
-   input_text = request.json.get("text")
+       input_text = request.json.get("text")
     
-    if not input_text:
+       if not input_text:
         # Respuesta para enviar si input_text está indefinido.
-       response = {
+          response = {
         "status": "error",
         "message":"ingresa texto para predesir emocion"
        }
-        
+          return jsonify(response)
+        else  :
+        predict_emotion,predict_emotion_img_url = predict(input_text)    
         # Respuesta para enviar si input_text no está indefinido.
-        
+        response = {
+            "status":"success",
+            "data":{
+                "predicted_emotion":predicted_emotion,
+                "predicted_emotion_img_url":predict_emotion_img_url
+            }
+        }
         # Enviar respuesta.         
-        
+        return jsonify(response)
        
-app.run(debug=True)
+    app.run(debug=True)
 
 
 
-    
+                        
